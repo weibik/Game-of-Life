@@ -1,3 +1,5 @@
+from calculations import get_num_of_neighbours, set_cell_value
+
 import numpy as np
 import pygame
 pygame.init()
@@ -13,47 +15,19 @@ RECT_HEIGHT = HEIGHT / ROWS
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+GRID_COLOR = (80, 80, 80)
 
 
 def draw_board(screen, board):
     for row in range(ROWS):
         for col in range(COLS):
+            color = WHITE if board[row][col] == 0 else BLACK
             if board[row][col] == 1:
                 color = BLACK
             else:
                 color = WHITE
-            rect = pygame.Rect(col * RECT_WIDTH, row * RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT)
-            pygame.draw.rect(screen, color, rect, 1)
-
-
-def get_num_of_neighbours(board: np.array, row: int, col: int) -> int:
-    num_of_neighbours = 0
-
-    for i in range(-1, 2):
-        for j in range(-1, 2):
-            if i == 0 and j == 0:
-                continue
-
-            new_row, new_col = row + i, col + j
-            if 0 <= new_row < ROWS and 0 <= new_col < COLS:
-                num_of_neighbours += board[new_row][new_col]
-
-    return num_of_neighbours
-
-
-def set_cell_value(state: int, num_of_neighbours: int) -> int:
-    if state == 1:
-        if num_of_neighbours > 3 or num_of_neighbours < 2:
-            return 0  # Cell dies due to overpopulation or underpopulation
-        else:
-            return 1  # Cell survives
-    elif state == 0:
-        if num_of_neighbours == 3:
-            return 1  # Cell becomes alive due to reproduction
-        else:
-            return 0  # Cell remains dead
-    else:
-        return 0
+            pygame.draw.rect(screen, color, (col * RECT_WIDTH, row * RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT))
+            pygame.draw.rect(screen, GRID_COLOR, (col * RECT_WIDTH, row * RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT), 1)
 
 
 def update_board(board, r, c):
