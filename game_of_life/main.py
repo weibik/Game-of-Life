@@ -71,11 +71,6 @@ def run():
     clock = pygame.time.Clock()
 
     board = np.zeros([ROWS, COLS], dtype="int64")
-    midlle_row = ROWS // 2
-    midlle_col = COLS // 2
-    board[midlle_row][midlle_col] = 1
-    board[midlle_row+1][midlle_col] = 1
-    board[midlle_row+2][midlle_col] = 1
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Conway's Game of Life")
 
@@ -98,7 +93,7 @@ def run():
         board = update_board(board, ROWS, COLS)
 
         pygame.display.flip()
-        pygame.time.delay(500)
+        pygame.time.delay(1000)
 
 
 if __name__ == "__main__":
