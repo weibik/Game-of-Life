@@ -23,7 +23,7 @@ def draw_board(screen, board):
             else:
                 color = WHITE
             rect = pygame.Rect(col * RECT_WIDTH, row * RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT)
-            pygame.draw.rect(screen, color, rect)
+            pygame.draw.rect(screen, color, rect, 1)
 
 
 def get_num_of_neighbours(board: np.array, row: int, col: int) -> int:
@@ -56,6 +56,16 @@ def set_cell_value(state: int, num_of_neighbours: int) -> int:
         return 0
 
 
+def update_board(board, r, c):
+    new_board = np.copy(board)
+    for i in range(r):
+        for j in range(c):
+            num_of_neighbours = get_num_of_neighbours(board, i, j)
+            new_board[i][j] = set_cell_value(board[i][j], num_of_neighbours)
+    board = np.copy(new_board)
+    return board
+
+
 def run():
     running = True
     clock = pygame.time.Clock()
@@ -64,6 +74,8 @@ def run():
     midlle_row = ROWS // 2
     midlle_col = COLS // 2
     board[midlle_row][midlle_col] = 1
+    board[midlle_row+1][midlle_col] = 1
+    board[midlle_row+2][midlle_col] = 1
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Conway's Game of Life")
 
@@ -73,10 +85,20 @@ def run():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                cell_x = x // (WIDTH // COLS)
+                cell_y = y // (HEIGHT // ROWS)
+
+                board[cell_y][cell_x] = 1 - board[cell_y][cell_x]
 
         screen.fill(WHITE)
         draw_board(screen, board)
+
+        board = update_board(board, ROWS, COLS)
+
         pygame.display.flip()
+        pygame.time.delay(500)
 
 
 if __name__ == "__main__":
