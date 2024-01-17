@@ -22,10 +22,6 @@ def draw_board(screen, board):
     for row in range(ROWS):
         for col in range(COLS):
             color = WHITE if board[row][col] == 0 else BLACK
-            if board[row][col] == 1:
-                color = BLACK
-            else:
-                color = WHITE
             pygame.draw.rect(screen, color, (col * RECT_WIDTH, row * RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT))
             pygame.draw.rect(screen, GRID_COLOR, (col * RECT_WIDTH, row * RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT), 1)
 
