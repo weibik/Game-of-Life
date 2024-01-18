@@ -1,4 +1,4 @@
-from calculations import get_num_of_neighbours, set_cell_value
+from game_logic import get_num_of_neighbours, set_cell_value
 
 import numpy as np
 import pygame
