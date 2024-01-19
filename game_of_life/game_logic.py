@@ -1,10 +1,5 @@
 import numpy as np
-
-WIDTH = 800
-HEIGHT = 800
-
-COLS = int(HEIGHT / 10)
-ROWS = int(WIDTH / 10)
+from config import WIDTH, HEIGHT, COLS, ROWS
 
 
 def get_num_of_neighbours(board: np.array, row: int, col: int) -> int:
