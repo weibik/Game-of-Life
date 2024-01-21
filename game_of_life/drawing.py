@@ -1,32 +1,36 @@
 import numpy as np
 from game_logic import get_num_of_neighbours, set_cell_value
-from config import WHITE, BLACK, RECT_HEIGHT, RECT_WIDTH, COLS, ROWS, GRID_COLOR
+from config import WHITE, BLACK, GRID_COLOR
 import pygame
 
 
-def update_board(board, r, c):
+def update_board(board, rows, cols):
     new_board = np.copy(board)
-    for i in range(r):
-        for j in range(c):
-            num_of_neighbours = get_num_of_neighbours(board, i, j)
+    for i in range(rows):
+        for j in range(cols):
+            num_of_neighbours = get_num_of_neighbours(board, i, j, rows, cols)
             new_board[i][j] = set_cell_value(board[i][j], num_of_neighbours)
     board = np.copy(new_board)
     return board
 
 
-def draw_board(screen, board):
-    for row in range(ROWS):
-        for col in range(COLS):
-            color = WHITE if board[row][col] == 0 else BLACK
+def draw_board(screen, board, rows, cols, rect_width, rect_height, black_mode=True):
+    if black_mode:
+        main_color, second_color = WHITE, BLACK
+    else:
+        main_color, second_color = BLACK, WHITE
+    for row in range(rows):
+        for col in range(cols):
+            color = main_color if board[row][col] == 0 else second_color
             pygame.draw.rect(
                 screen,
                 color,
-                (col * RECT_WIDTH, row * RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT),
+                (col * rect_width, row * rect_height, rect_width, rect_height),
             )
             pygame.draw.rect(
                 screen,
                 GRID_COLOR,
-                (col * RECT_WIDTH, row * RECT_HEIGHT, RECT_WIDTH, RECT_HEIGHT),
+                (col * rect_width, row * rect_height, rect_width, rect_height),
                 1,
             )
 
