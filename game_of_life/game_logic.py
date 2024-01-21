@@ -1,8 +1,11 @@
 import numpy as np
-from config import WIDTH, HEIGHT, COLS, ROWS
 
 
-def get_num_of_neighbours(board: np.array, row: int, col: int) -> int:
+def initialize_board(rows, cols):
+    return np.zeros([rows, cols], dtype="int64")
+
+
+def get_num_of_neighbours(board: np.array, x: int, y: int, rows, cols) -> int:
     num_of_neighbours = 0
 
     for i in range(-1, 2):
@@ -10,8 +13,8 @@ def get_num_of_neighbours(board: np.array, row: int, col: int) -> int:
             if i == 0 and j == 0:
                 continue
 
-            new_row, new_col = row + i, col + j
-            if 0 <= new_row < ROWS and 0 <= new_col < COLS:
+            new_row, new_col = x + i, y + j
+            if 0 <= new_row < rows and 0 <= new_col < cols:
                 num_of_neighbours += board[new_row][new_col]
 
     return num_of_neighbours
