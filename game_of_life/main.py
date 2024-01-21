@@ -1,6 +1,6 @@
-from config import WIDTH, HEIGHT, WHITE, BUTTON_COLOR, BUTTON_TEXT_COLOR, ROWS, COLS
+from config import WIDTH, HEIGHT, WHITE, BUTTON_COLOR, BUTTON_TEXT_COLOR, ROWS, COLS, RECT_WIDTH, RECT_HEIGHT
 from drawing import update_board, draw_board, draw_button
-import numpy as np
+from game_logic import initialize_board
 import pygame
 
 pygame.init()
@@ -10,7 +10,7 @@ def run():
     running = True
     clock = pygame.time.Clock()
 
-    board = np.zeros([ROWS, COLS], dtype="int64")
+    board = initialize_board(ROWS, COLS)
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Conway's Game of Life")
 
@@ -47,7 +47,7 @@ def run():
                         start_stop_button_color = BUTTON_COLOR
                         start_stop_button_text = "Start"
                 elif clear_button_rect.collidepoint(x, y):
-                    board = np.zeros([ROWS, COLS], dtype="int64")
+                    board = initialize_board(ROWS, COLS)
                 else:
                     drawing_mode = True
                     board[cell_y][cell_x] = 1 - board[cell_y][cell_x]
@@ -55,7 +55,7 @@ def run():
                 drawing_mode = False
 
         screen.fill(WHITE)
-        draw_board(screen, board)
+        draw_board(screen, board, ROWS, COLS, RECT_WIDTH, RECT_HEIGHT, black_mode=True)
 
         if start_stop_button_clicked and not drawing_mode:
             board = update_board(board, ROWS, COLS)
