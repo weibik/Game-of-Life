@@ -1,4 +1,14 @@
-from config import WIDTH, HEIGHT, WHITE, BUTTON_COLOR, BUTTON_TEXT_COLOR, ROWS, COLS, RECT_WIDTH, RECT_HEIGHT
+from config import (
+    WIDTH,
+    HEIGHT,
+    WHITE,
+    BUTTON_COLOR,
+    BUTTON_TEXT_COLOR,
+    ROWS,
+    COLS,
+    RECT_WIDTH,
+    RECT_HEIGHT,
+)
 from drawing import update_board, draw_board, draw_button
 from game_logic import initialize_board
 import pygame
