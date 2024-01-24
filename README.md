@@ -8,7 +8,7 @@ Conway's Game of Life implementation in Python using Pygame.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Preview](#preview)
-- prerequisites(#prerequisites)
+- [Prerequisites](#prerequisites)
 
 
 ## Description
