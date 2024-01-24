@@ -1,6 +1,6 @@
 import numpy as np
-from game_logic import get_num_of_neighbours, set_cell_value
-from config import WHITE, BLACK, GRID_COLOR
+from game_of_life.game_logic import get_num_of_neighbours, set_cell_value
+from game_of_life.config import WHITE, BLACK, GRID_COLOR
 import pygame
 
 
