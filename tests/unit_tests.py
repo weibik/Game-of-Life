@@ -2,7 +2,11 @@ import unittest
 import numpy as np
 import pygame
 from game_of_life.drawing import update_board, draw_button
-from game_of_life.game_logic import initialize_board, get_num_of_neighbours, set_cell_value
+from game_of_life.game_logic import (
+    initialize_board,
+    get_num_of_neighbours,
+    set_cell_value,
+)
 
 
 class TestGameLogic(unittest.TestCase):
