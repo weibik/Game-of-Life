@@ -5,6 +5,7 @@ import pygame
 
 
 def update_board(board, rows, cols):
+    """ Update each cell in the board depending on the neighbours. """
     new_board = np.copy(board)
     for i in range(rows):
         for j in range(cols):
